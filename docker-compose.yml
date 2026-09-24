@@ -30,8 +30,10 @@ services:
     networks:
       - rli-network
 
-  rli-web:
-    build: ./nginx
+rli-web:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
     container_name: rli-web
     restart: always
     ports:
