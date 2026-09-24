@@ -1,7 +1,4 @@
-FROM python:3.10-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-EXPOSE 5000
-CMD ["python", "app.py"]
+FROM nginx:alpine
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY frontend /usr/share/nginx/html
+EXPOSE 80
