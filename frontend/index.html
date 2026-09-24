@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLI Employee Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>RLI Portal</h2>
+        <ul>
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="#">Employees</a></li>
+            <li><a href="#">Attendance</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Employee Directory</h1>
+            <button id="addEmpBtn" class="btn-primary">+ Add Employee</button>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Total Employees</h3>
+                <p id="totalEmpCount">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Active Staff</h3>
+                <p id="activeEmpCount">0</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="employeeTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeList">
+                    <!-- Data populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register New Employee</h2>
+            <form id="addEmployeeForm">
+                <input type="text" id="empId" placeholder="Employee ID (e.g., RLI004)" required>
+                <input type="text" id="empName" placeholder="Full Name" required>
+                <input type="text" id="empDept" placeholder="Department (e.g., HR, IT)" required>
+                <input type="text" id="empDesig" placeholder="Designation" required>
+                <select id="empType" required>
+                    <option value="">Select Type</option>
+                    <option value="Officer">Officer</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Apprentice">Apprentice</option>
+                    <option value="Contract Worker">Contract Worker</option>
+                </select>
+                <input type="text" id="empLoc" placeholder="Location" required>
+                <input type="date" id="empDate" required>
+                <button type="submit" class="btn-primary">Save Employee</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

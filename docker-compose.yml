@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  rli-mysql:
+    image: mysql:8.0
+    container_name: rli-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - rli-mysql-data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rli-network
+
+  rli-backend:
+    build: ./backend
+    container_name: rli-backend
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    depends_on:
+      - rli-mysql
+    networks:
+      - rli-network
+
+  rli-web:
+    build: ./nginx
+    container_name: rli-web
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - rli-backend
+    networks:
+      - rli-network
+
+volumes:
+  rli-mysql-data:
+
+networks:
+  rli-network:
+    driver: bridge
